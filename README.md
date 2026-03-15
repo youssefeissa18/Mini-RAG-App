@@ -14,7 +14,7 @@ $ conda create -n mini-rag python=3.10
 ```
 3) acivate the envitoment 
 ``` bash
-$ conda activate mini-rag
+$ conda activate mini-rag-app1
 ```
 
 ## Installation
