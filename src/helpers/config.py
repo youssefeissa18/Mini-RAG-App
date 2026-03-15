@@ -1,7 +1,7 @@
 from pydantic_settings import BaseSettings, settingsconfigDict
 
 class Settings(BaseSettings):
-
+    
     OPENAI_API_KEY: str
     app_name: str
     app_version: str
