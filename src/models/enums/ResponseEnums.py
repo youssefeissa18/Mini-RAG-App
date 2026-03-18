@@ -7,4 +7,5 @@ class ResponseSignal(str, Enum):
     FILE_UPLOAD_FAILED = "File upload failed"
     FILE_VALIDATE_SUCCESS = "File is valid"
     FILE_VALIDATE_FAILED = "File is invalid"
-    
+    PROCESSING_SUCCESS = "File processed successfully"
+    PROCESSING_FAILED = "Processing failed"
