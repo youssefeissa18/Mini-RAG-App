@@ -9,3 +9,5 @@ class ResponseSignal(str, Enum):
     FILE_VALIDATE_FAILED = "File is invalid"
     PROCESSING_SUCCESS = "File processed successfully"
     PROCESSING_FAILED = "Processing failed"
+    NO_FILES_ERROR = "Not found any files to process"
+    FILE_ID_ERROR = "File ID is required for processing"

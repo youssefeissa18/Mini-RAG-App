@@ -8,7 +8,7 @@ class DataChunk(BaseModel):
     chunk_metadata: dict
     chunk_order: int = Field(..., gt=0)
     chunk_project_id: ObjectId
-
+    chunk_asset_id: ObjectId
 
     @validator('project_id')
     def validate_project_id(cls, value):
