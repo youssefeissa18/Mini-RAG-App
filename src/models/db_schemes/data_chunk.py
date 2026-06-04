@@ -10,9 +10,9 @@ class DataChunk(BaseModel):
     chunk_project_id: ObjectId
     chunk_asset_id: ObjectId
 
-    @validator('project_id')
+    @validator('chunk_project_id')
     def validate_project_id(cls, value):
-        if not value.isalnum():
+        if not str(value).isalnum():
             raise ValueError("Project ID must be alphanumeric")
         return value
 
