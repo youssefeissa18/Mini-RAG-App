@@ -2,6 +2,7 @@ from .Base_data_model import BaseDataModel
 from .db_schemes import data_chunk
 from .enums.DataBaseEnums import DataBaseEnum
 from pymongo import InsertOne
+from bson import ObjectId
 
 class ChunkModel(BaseDataModel):
     def __init__(self, db_client : object):

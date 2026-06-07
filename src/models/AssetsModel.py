@@ -2,6 +2,7 @@ from .Base_data_model import BaseDataModel
 from .enums.DataBaseEnums import DataBaseEnum
 from .db_schemes.asset import Asset
 from bson import ObjectId
+
 class AssetsModel(BaseDataModel):
     def __init__(self, db_client : object):
         super().__init__(db_client=db_client)
