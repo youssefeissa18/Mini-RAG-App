@@ -21,6 +21,7 @@ class COHEREProvider(LLMInterface):
         self.embedding_size = None
 
         self.client = cohere.Client(api_key = self.api_key)
+        self.enums = Cohereenum
         self.logger = logging.getLogger(__name__)
 
     def set_generation_model(self, Model_id : str):

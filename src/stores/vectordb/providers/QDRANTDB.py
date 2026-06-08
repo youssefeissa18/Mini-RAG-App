@@ -2,6 +2,7 @@ from qdrant_client import QdrantClient, models
 from ..VectorDBInterface import VectorDBInterface
 from .VectorDBEnum import VectorDBType, DistanceMethodEnums
 import logging
+from models.db_schemes.data_chunk import RetrievedDoucment
 from typing import List
 class QDRANTDB(VectorDBInterface):
     def __init__(self, db_path: str, distance_method:DistanceMethodEnums):
@@ -111,8 +112,21 @@ class QDRANTDB(VectorDBInterface):
         return True 
     
     def search_by_vector(self, collection_name:str, vector:List, limit:int = 5):
-        return self.client.search(
+        result = self.client.search(
             collection_name=collection_name,
             query_vector=vector,
             limit=limit
         )
+
+        if not result or len(result) == 0:
+            return None
+        
+        return [
+            RetrievedDoucment(**{
+                "score":res.score,
+                "text" : res.payload["text"]
+
+            })
+            for res in results
+        ]
+

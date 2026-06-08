@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import List 
+from models.db_schemes.data_chunk import RetrievedDoucment
 class VectorDBInterface(ABC):
     @abstractmethod
     def connect(self):
@@ -43,5 +44,7 @@ class VectorDBInterface(ABC):
         pass
 
     @abstractmethod
-    def search_by_vector(self, collection_name:str, vector:List, limit:int):
+    def search_by_vector(self, collection_name:str, vector:List, limit:int) -> List[RetrievedDoucment]:
         pass
+
+    

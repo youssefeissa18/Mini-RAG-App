@@ -33,6 +33,10 @@ class Settings(BaseSettings):
     VECTOR_DB_PATH : str
     VECTOR_DB_DISTANCE_METHOD : str = None
 
+    # ========================= Template Configs =========================
+    PRIMARY_LANG : str = "ar"
+    DEFAULT_LANG : str = "en"
+
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
