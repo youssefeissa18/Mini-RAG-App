@@ -71,7 +71,8 @@ class OpenAiProvider(LLMInterface):
         response = self.client.embeddings.create(
             model = self.embedding_model_id,
             input = text,
-        )
+        ) 
+        
 
         if not response or not response.data or len(response.data) == 0 or not response.data[0].embedding:
             self.logger.error("No embedding returned from OpenAI.")
