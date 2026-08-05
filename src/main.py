@@ -1,16 +1,21 @@
 from fastapi import FastAPI, File, UploadFile
 from routes import base, data, nlp
-from motor.motor_asyncio import AsyncIOMotorClient
 from helpers.config import get_settings
 from stores.llm.LLMFACTORYProvider import LLMFactoryProvider
 from stores.vectordb.VectorDBFactoryProvider import VectorDBFactoryProvider
 from stores.llm.templates.template_parser import TemplateParser
+from sqlalalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalalchemy.orm import sessionmaker
+
+
 app = FastAPI()
 
 async def startup_span():
     settings = get_settings()
-    app.mongodb_conn = AsyncIOMotorClient(settings.MONGODB_URL)
-    app.db_client = app.mongodb_conn[settings.MONGODB_DATABASE]
+    postgres_con = f"postgresql+asyncpg://{settings.POSTGRESQL_USER}:{settings.POSTGRESQL_PASSWORD}@{settings.POSTGRESQL_HOST}:{settings.POSTGRESQL_PORT}/{settings.POSTGRESQL_MAIN_DATABASE}"
+    app.db_engine = create_async_engine(postgres_con)
+
+    app.db_client = sessionmaker(app.db_engine, class_=AsyncSession, expire_on_commit=False)
 
     llm_provider_factory = LLMFactoryProvider(settings)
     vectordb_provider_factory = VectorDBFactoryProvider(settings)
@@ -34,7 +39,7 @@ async def startup_span():
     )
     
 async def shutdown_span():
-    app.mongodb_conn.close()
+    app.db_engine.dispose()
     app.vectordb_client.disconnect()
 
 
